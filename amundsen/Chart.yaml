@@ -1,0 +1,15 @@
+apiVersion: v1
+description: Amundsen is a metadata driven application for improving the productivity
+  of data analysts, data scientists and engineers when interacting with data.
+home: https://github.com/amundsen-io/amundsen
+icon: https://github.com/amundsen-io/amundsen/blob/master/docs/img/logos/amundsen_logo_on_light.svg
+keywords:
+- metadata
+- data
+maintainers:
+- email: amundsen-tsc@lists.lfai.foundation
+  name: Amundsen TSC
+name: amundsen
+sources:
+- https://github.com/amundsen-io/amundsen
+version: v0.0.3
