@@ -88,14 +88,14 @@ extraEnvRaw: []
   #       key: password
 
 # -- Extra environment variables to pass as secrets
-extraSecretEnv: {}
+extraSecretEnv: {
   # MAPBOX_API_KEY: ...
   # # Google API Keys: https://console.cloud.google.com/apis/credentials
   # GOOGLE_KEY: ...
   # GOOGLE_SECRET: ...
   #   # Generate your own secret key for encryption. Use openssl rand -base64 42 to generate a good key
-  #  SUPERSET_SECRET_KEY: 'CHANGE_ME_TO_A_COMPLEX_RANDOM_SECRET'
-
+  SUPERSET_SECRET_KEY: 'mypwd'
+}
 # -- Extra files to mount on `/app/pythonpath`
 extraConfigs: {}
   # import_datasources.yaml: |
@@ -211,7 +211,7 @@ ingress:
   path: /
   pathType: ImplementationSpecific
   hosts:
-    - chart-example.local
+    - localhost
   tls: []
   extraHostsRaw: []
   #  - secretName: chart-example-tls
@@ -704,7 +704,7 @@ init:
   jobAnnotations:
     "helm.sh/hook": post-install,post-upgrade
     "helm.sh/hook-delete-policy": "before-hook-creation"
-  loadExamples: false
+  loadExamples: true
   createAdmin: true
   adminUser:
     username: admin
