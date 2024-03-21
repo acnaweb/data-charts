@@ -112,7 +112,7 @@ search:
   # - name: "image-pull-secret"
 
   # search.imageTag -- The image tag of the search container.
-  imageTag: 4.1.1
+  imageTag: 2.11.1
 
   # search.replicas -- How many replicas of the search service to run.
   replicas: 1
@@ -179,7 +179,7 @@ metadata:
   # - name: "image-pull-secret"
 
   # metadata.imageTag -- The image tag of the metadata container.
-  imageTag: 3.12.1
+  imageTag: 3.9.0
 
   # metadata.replicas -- How many replicas of the metadata service to run.
   replicas: 1
@@ -231,7 +231,7 @@ frontEnd:
   # - name: "image-pull-secret"
 
   # frontEnd.imageTag -- The image tag of the frontend container.
-  imageTag: 4.2.0
+  imageTag: 3.12.0
 
   # frontEnd.servicePort -- The port the frontend service will be exposed on via the loadbalancer.
   servicePort: 80
