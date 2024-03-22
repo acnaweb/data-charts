@@ -8,6 +8,8 @@ kubectl port-forward service/amundsen-frontend 5000:5000 --namespace dhuo-core
 kubectl port-forward service/amundsen-neo4j 7474:7474 --namespace dhuo-core
 kubectl port-forward service/amundsen-neo4j 7473:7473 --namespace dhuo-core
 kubectl port-forward service/amundsen-neo4j 7687:7687 --namespace dhuo-core 
+kubectl port-forward service/amundsen-metadata 5002:5002 --namespace dhuo-core 
+
 ```
 
 ```sh
