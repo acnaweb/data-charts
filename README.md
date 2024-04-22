@@ -9,9 +9,8 @@ helm repo add airbyte https://airbytehq.github.io/helm-charts
 ```
 
 ```sh
-helm install airbyte airbyte/airbyte
+helm install airbyte airbyte/airbyte --namespace dev --create-namespace 
 ```
-
 ## Amundsen
 
 #### Metadata - Criar usuário
@@ -19,7 +18,7 @@ helm install airbyte airbyte/airbyte
 Criar port-forward para o service `amundsen-metadata`
 
 ```sh
-kubectl port-forward service/amundsen-metadata 5002:5002 --namespace data 
+kubectl port-forward service/amundsen-metadata 5002:5002 --namespace dev 
 ```
 
 Criar o usuário 
@@ -34,8 +33,8 @@ curl -X PUT -v http://localhost:5002/user \
 ```sh
 helm repo add XXXX
 helm pull amundsen
-helm install amundsen ./amundsen --values ./amundsen/values.yaml --namespace data--create-namespace 
-helm uninstall amundsen --namespace data
+helm install amundsen ./amundsen --values ./amundsen/values.yaml --namespace dev --create-namespace 
+helm uninstall amundsen --namespace dev
 kubectl port-forward service/amundsen-frontend 5000:5000
 kubectl port-forward service/amundsen-neo4j 7474:7474
 kubectl port-forward service/amundsen-neo4j 7473:7473
@@ -52,9 +51,9 @@ kubectl port-forward service/amundsen-metadata 5002:5002
 helm repo add elasticsearch https://helm.elastic.co
 helm pull elasticsearch/elasticsearch --version 7.17.3
 tar -xzf elasticsearch-8.5.1.tgz 
-helm install elasticsearch ./elasticsearch --values ./elasticsearch/values.yaml --namespace data --create-namespace 
+helm install elasticsearch ./elasticsearch --values ./elasticsearch/values.yaml --namespace dev --create-namespace 
 helm uninstall elasticsearch -n data 
-kubectl port-forward service/elasticsearch-cluster-master 9200:9200 --namespace data
+kubectl port-forward service/elasticsearch-cluster-master 9200:9200 --namespace dev
 ```
 
 ## Instalação - Superset
