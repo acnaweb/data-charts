@@ -1,31 +1,25 @@
 # Data Charts
 
-## Instalação -  Amundsen no K8S
+Deploy data services on Kubernetes
 
-#### Chart
+## Airbyte
 
 ```sh
-helm pull dhuodata/amundsen --version 0.0.3
+helm repo add airbyte https://airbytehq.github.io/helm-charts
 ```
 
-#### Values
+```sh
+helm install airbyte airbyte/airbyte
+```
 
-| key | value |
-| -- | --| 
-| search.imageTag | 2.11.1 |
-| metadata.imageTag | 3.9.0 |
-| frontEnd.imageTag | 3.12.0 |
-| neo4j.imageTag | 3.5.26 |
-| search.proxy.endpoint | elasticsearch-cluster-master.dhuo-core.svc.cluster.local:9200 |
-| search.proxy.user | elastic |
-| search.proxy.password | <secret> |
+## Amundsen
 
 #### Metadata - Criar usuário
 
 Criar port-forward para o service `amundsen-metadata`
 
 ```sh
-kubectl port-forward service/amundsen-metadata 5002:5002 --namespace dhuo-core 
+kubectl port-forward service/amundsen-metadata 5002:5002 --namespace data 
 ```
 
 Criar o usuário 
@@ -38,16 +32,15 @@ curl -X PUT -v http://localhost:5002/user \
 ```
 
 ```sh
-helm repo add dhuodata https://registry-dhuo.br.engineering/chartrepo/helm-data
-helm pull dhuodata/amundsen
-tar -xzf amundsen-v0.0.3.tgz
-helm install amundsen ./amundsen --values ./amundsen/values.yaml --namespace dhuo-core --create-namespace 
-helm uninstall amundsen --namespace dhuo-core 
-kubectl port-forward service/amundsen-frontend 5000:5000 --namespace dhuo-core
-kubectl port-forward service/amundsen-neo4j 7474:7474 --namespace dhuo-core
-kubectl port-forward service/amundsen-neo4j 7473:7473 --namespace dhuo-core
-kubectl port-forward service/amundsen-neo4j 7687:7687 --namespace dhuo-core 
-kubectl port-forward service/amundsen-metadata 5002:5002 --namespace dhuo-core 
+helm repo add XXXX
+helm pull amundsen
+helm install amundsen ./amundsen --values ./amundsen/values.yaml --namespace data--create-namespace 
+helm uninstall amundsen --namespace data
+kubectl port-forward service/amundsen-frontend 5000:5000
+kubectl port-forward service/amundsen-neo4j 7474:7474
+kubectl port-forward service/amundsen-neo4j 7473:7473
+kubectl port-forward service/amundsen-neo4j 7687:7687 
+kubectl port-forward service/amundsen-metadata 5002:5002 
 
 ```
 
@@ -59,9 +52,9 @@ kubectl port-forward service/amundsen-metadata 5002:5002 --namespace dhuo-core
 helm repo add elasticsearch https://helm.elastic.co
 helm pull elasticsearch/elasticsearch --version 7.17.3
 tar -xzf elasticsearch-8.5.1.tgz 
-helm install elasticsearch ./elasticsearch --values ./elasticsearch/values.yaml --namespace dhuo-core --create-namespace 
-helm uninstall elasticsearch -n dhuo-core 
-kubectl port-forward service/elasticsearch-cluster-master 9200:9200 --namespace dhuo-core
+helm install elasticsearch ./elasticsearch --values ./elasticsearch/values.yaml --namespace data --create-namespace 
+helm uninstall elasticsearch -n data 
+kubectl port-forward service/elasticsearch-cluster-master 9200:9200 --namespace data
 ```
 
 ## Instalação - Superset
